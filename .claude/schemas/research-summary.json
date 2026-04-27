@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Research Summary",
+  "description": "Output schema for research agent",
+  "type": "object",
+  "required": ["question", "findings", "sources", "confidence"],
+  "properties": {
+    "question": {
+      "type": "string",
+      "description": "The research question addressed"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["finding", "relevance"],
+        "properties": {
+          "finding": {
+            "type": "string"
+          },
+          "relevance": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Files or URLs consulted"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "Confidence level in findings"
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Information that could not be found"
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

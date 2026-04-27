@@ -1,0 +1,19 @@
+# Claude Code — personal and runtime files
+.claude/settings.local.json
+.claude/memory/
+CLAUDE.local.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment files (if used in project)
+.env
+.env.local
+.env.*.local

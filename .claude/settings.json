@@ -1,0 +1,24 @@
+{
+  "tools": {
+    "bash": true,
+    "file_write": true,
+    "allowed_write_paths": [
+      "src/",
+      "docs/",
+      ".claude/memory/"
+    ]
+  },
+  "safety": {
+    "require_confirmation_before_deploy": true,
+    "protected_paths": [
+      ".env",
+      ".env.*",
+      "secrets/",
+      "credentials/"
+    ]
+  },
+  "defaults": {
+    "output_format": "markdown",
+    "verbosity": "standard"
+  }
+}

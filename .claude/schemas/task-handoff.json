@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Task Handoff",
+  "description": "Schema for passing work between agents",
+  "type": "object",
+  "required": ["from_agent", "to_agent", "task", "context", "timestamp"],
+  "properties": {
+    "from_agent": {
+      "type": "string",
+      "description": "Agent initiating the handoff"
+    },
+    "to_agent": {
+      "type": "string",
+      "description": "Agent receiving the handoff"
+    },
+    "task": {
+      "type": "string",
+      "description": "What the receiving agent should do"
+    },
+    "context": {
+      "type": "object",
+      "description": "Relevant context for the task",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "normal", "low"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "deadline": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

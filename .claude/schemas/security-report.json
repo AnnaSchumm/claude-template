@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Security Report",
+  "description": "Output schema for security auditor agent",
+  "type": "object",
+  "required": ["scope", "vulnerabilities", "risk_level", "timestamp"],
+  "properties": {
+    "scope": {
+      "type": "object",
+      "properties": {
+        "files_scanned": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "scan_type": {
+          "type": "string",
+          "enum": ["full", "partial", "targeted"]
+        }
+      }
+    },
+    "vulnerabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "category", "description", "location"],
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low", "info"]
+          },
+          "category": {
+            "type": "string",
+            "description": "e.g., XSS, SQL Injection, Auth Bypass"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "object",
+            "properties": {
+              "file": { "type": "string" },
+              "line": { "type": "integer" }
+            }
+          },
+          "remediation": {
+            "type": "string"
+          },
+          "references": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "none"]
+    },
+    "recommendations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

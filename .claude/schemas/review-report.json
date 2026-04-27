@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Review Report",
+  "description": "Output schema for code review agent",
+  "type": "object",
+  "required": ["summary", "files_reviewed", "issues", "verdict"],
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "Brief overview of the review"
+    },
+    "files_reviewed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of file paths reviewed"
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "file", "line", "message"],
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "major", "minor", "suggestion"]
+          },
+          "file": {
+            "type": "string"
+          },
+          "line": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          },
+          "suggestion": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["approve", "request-changes", "needs-discussion"]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional reviewer notes"
+    }
+  }
+}

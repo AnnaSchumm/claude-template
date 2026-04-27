@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agent Handoff Protocol",
+  "description": "Standard format for agent-to-agent communication",
+  "type": "object",
+  "required": ["handoff_id", "from", "to", "payload", "timestamp"],
+  "properties": {
+    "handoff_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this handoff"
+    },
+    "from": {
+      "type": "object",
+      "required": ["agent", "task_completed"],
+      "properties": {
+        "agent": {
+          "type": "string",
+          "description": "Name of the sending agent"
+        },
+        "task_completed": {
+          "type": "string",
+          "description": "What the sending agent accomplished"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Files or outputs created"
+        }
+      }
+    },
+    "to": {
+      "type": "object",
+      "required": ["agent", "task_requested"],
+      "properties": {
+        "agent": {
+          "type": "string",
+          "description": "Name of the receiving agent"
+        },
+        "task_requested": {
+          "type": "string",
+          "description": "What the receiving agent should do"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Task-specific data for the receiving agent",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "context": {
+          "type": "object"
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "success_criteria": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "normal", "low"],
+      "default": "normal"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "timeout": {
+      "type": "integer",
+      "description": "Max seconds for receiving agent to complete"
+    },
+    "fallback": {
+      "type": "string",
+      "description": "Agent to invoke if primary fails"
+    }
+  }
+}
